@@ -1,0 +1,40 @@
+global:
+  scrape_interval: 2s
+  evaluation_interval: 2s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: [ 'prometheus:9090' ]
+
+  - job_name: 'api-gateway-service'
+    metrics_path: '/api-gateway/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Api-Gateway-Service'
+          application: 'Api-Gateway-Service'
+
+  - job_name: 'book-service'
+    metrics_path: '/books/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Book-Service'
+          application: 'Book-Service'
+
+  - job_name: 'patron-service'
+    metrics_path: '/patrons/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Patron-Service'
+          application: 'Patron-Service'
+
+  - job_name: 'borrow-service'
+    metrics_path: '/borrows/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Borrow-Service'
+          application: 'Borrow-Service'

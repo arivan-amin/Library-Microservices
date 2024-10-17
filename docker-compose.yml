@@ -1,0 +1,128 @@
+volumes:
+  app-logs:
+  mysql-data:
+
+services:
+  discovery-server:
+    container_name: library-discovery-server
+    restart: unless-stopped
+    image: arivanamin/library-discovery-server
+    ports:
+      - "8761:8761"
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Library/Logs/
+
+  api-gateway:
+    container_name: library-api-gateway
+    restart: unless-stopped
+    image: arivanamin/library-api-gateway
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Library/Logs/
+    depends_on:
+      - discovery-server
+
+  tempo:
+    container_name: library-tempo
+    restart: unless-stopped
+    image: grafana/tempo:2.3.0
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./Docker/tempo/tempo.yml:/etc/tempo.yaml:ro
+    ports:
+      - "3110:3100"  # Tempo
+      - "9411:9411" # zipkin
+
+  loki:
+    container_name: library-loki
+    restart: unless-stopped
+    image: grafana/loki:3.2.0
+    command: [ "-config.file=/etc/loki/local-config.yaml" ]
+    ports:
+      - "3100:3100"
+
+  promtail:
+    container_name: library-promtail
+    restart: unless-stopped
+    image: grafana/promtail:3.2.0
+    volumes:
+      - ./Docker/promtail/promtail-config.yaml:/etc/promtail/config.yml
+      - app-logs:/logs
+      - ${HOME}/Apps/Library/Logs:/local-logs
+    command: -config.file=/etc/promtail/config.yml
+
+  prometheus:
+    container_name: library-prometheus
+    restart: unless-stopped
+    image: prom/prometheus:v2.54.1
+    command:
+      - --enable-feature=exemplar-storage
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./Docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+
+  grafana:
+    container_name: library-grafana
+    restart: unless-stopped
+    image: grafana/grafana:11.2.0
+    volumes:
+      - ./Docker/grafana:/etc/grafana/provisioning/datasources:ro
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    ports:
+      - "3000:3000"
+  
+  mysql:
+    container_name: library-mysql
+    restart: unless-stopped
+    image: mysql:9.0.1
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./Docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # Services
+  book-service:
+    container_name: library-book-service
+    restart: unless-stopped
+    image: arivanamin/library-book-service
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Library/Logs/
+    depends_on:
+      - discovery-server
+
+  patron-service:
+    container_name: library-patron-service
+    restart: unless-stopped
+    image: arivanamin/library-patron-service
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Library/Logs/
+    depends_on:
+      - discovery-server
+
+  borrow-service:
+    container_name: library-borrow-service
+    restart: unless-stopped
+    image: arivanamin/library-borrow-service
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Library/Logs/
+    depends_on:
+      - discovery-server

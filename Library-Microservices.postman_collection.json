@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "b4368acc-9f5c-412e-9ce2-fbac7f0e9924",
+		"name": "Library-Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17088201"
+	},
+	"item": [
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Get Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/books",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/books/0001b624-24ba-4f45-bb50-0eebc6d509e8",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"books",
+								"0001b624-24ba-4f45-bb50-0eebc6d509e8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/books/0425f682-0781-4565-bd01-caf3585b2ff6",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"books",
+								"0425f682-0781-4565-bd01-caf3585b2ff6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"isbn\":\"3333333333333\",\n  \"title\":\"updated title\",\n  \"author\":\"updated author\",\n  \"publicationYear\":\"2023\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/books/0425f682-0781-4565-bd01-caf3585b2ff6",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"books",
+								"0425f682-0781-4565-bd01-caf3585b2ff6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"isbn\":\"4523523452345\",\n  \"title\":\"{{$randomFirstName}}\",\n  \"author\":\"{{$randomLastName}}\",\n  \"publicationYear\":\"2020\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/books",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patron",
+			"item": [
+				{
+					"name": "Get Patrons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/patrons",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patrons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patron Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/patrons/2e82413d-48c8-4fb9-b592-1df88723a756",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patrons",
+								"2e82413d-48c8-4fb9-b592-1df88723a756"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patron",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/patrons/2ada74ad-267f-4ee6-a07d-0f31fe1b8995",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patrons",
+								"2ada74ad-267f-4ee6-a07d-0f31fe1b8995"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Patron",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"john smith\",\n  \"contactInformation\":\"new york, 445th street\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/patrons",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patrons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patron",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"updated john smith\",\n  \"contactInformation\":\"updated new york, 445th street\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/patrons/2e82413d-48c8-4fb9-b592-1df88723a756",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patrons",
+								"2e82413d-48c8-4fb9-b592-1df88723a756"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Borrow",
+			"item": [
+				{
+					"name": "Borrow Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/borrow/0425f682-0781-4565-bd01-caf3585b2ff6/patron/2e82413d-48c8-4fb9-b592-1df88723a756",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"borrow",
+								"0425f682-0781-4565-bd01-caf3585b2ff6",
+								"patron",
+								"2e82413d-48c8-4fb9-b592-1df88723a756"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrow Book not found",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/borrow/0425f682-0781-4565-bd01-caf3585b2ff6/patron/2e82413d-48c8-4fb9-b592-1df88723a756",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"borrow",
+								"0425f682-0781-4565-bd01-caf3585b2ff6",
+								"patron",
+								"2e82413d-48c8-4fb9-b592-1df88723a756"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrow Patron not found",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/borrow/0425f682-0781-4565-bd01-caf3585b2ff6/patron/2e82413d-48c8-4fb9-b592-1df88723a756",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"borrow",
+								"0425f682-0781-4565-bd01-caf3585b2ff6",
+								"patron",
+								"2e82413d-48c8-4fb9-b592-1df88723a756"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return Book valid",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/return/0425f682-0781-4565-bd01-caf3585b2ff6/patron/2e82413d-48c8-4fb9-b592-1df88723a756",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"return",
+								"0425f682-0781-4565-bd01-caf3585b2ff6",
+								"patron",
+								"2e82413d-48c8-4fb9-b592-1df88723a756"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return Book record not found",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "admin:admin@localhost:8080/api/return/0425f682-0781-4565-bd01-caf3585b2ff6/patron/2e82413d-48c8-4fb9-b592-1df88723a756",
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"return",
+								"0425f682-0781-4565-bd01-caf3585b2ff6",
+								"patron",
+								"2e82413d-48c8-4fb9-b592-1df88723a756"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
